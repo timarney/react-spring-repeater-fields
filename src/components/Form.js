@@ -12,7 +12,7 @@ export const Form = ({ item }) => {
 
   return (
     <div>
-      <label htmlFor="client">{`id: ${item.id}`}</label>
+      <label htmlFor="client">{`Name ${item.index + 1}`}:</label>
       <input
         type="text"
         name={`item${item.index}`}
