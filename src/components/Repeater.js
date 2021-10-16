@@ -6,7 +6,7 @@ import { Item } from "./Item";
 export const Repeater = () => {
   const { state } = useRepeater();
 
-  let height = 0;
+  let height = 40;
   const offset = 0;
 
   const listTransitions = useTransition(
@@ -24,7 +24,7 @@ export const Repeater = () => {
   );
 
   return (
-    <div style={{ height }}>
+    <div className="items" style={{ height }}>
       {listTransitions((styles, item, t, index) => {
         return (
           <animated.div style={{ zIndex: state.length - index, ...styles }}>
