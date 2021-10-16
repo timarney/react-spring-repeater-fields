@@ -1,22 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@wordpress/components";
 import { useRepeater } from "../store/RepeaterContext";
 
 export const TopBar = () => {
+  const [itemAdded, setItemAdded] = useState(false);
   const { dispatch, itemsRef } = useRepeater();
   const handleAddClient = () => {
     dispatch({ type: "add" });
+    setItemAdded(true)
   };
 
   useEffect(() => {
-    // @todo -- only do this when adding items
+    if (!itemAdded) return;
+
     const el = itemsRef.current[itemsRef.current.length - 1]
     const y = el.querySelector("div").getBoundingClientRect().top + window.scrollY;
     window.scroll({
       top: y,
       behavior: 'smooth'
     });
-  })
+
+    setItemAdded(false);
+  }, [itemAdded])
 
   return (
     <div className="top-bar">
