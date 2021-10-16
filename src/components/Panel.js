@@ -7,10 +7,6 @@ export const Panel = ({ item }) => {
   const { state, itemsRef, dispatch, getPreviousIndex } = useRepeater();
 
   const handleMoveUp = (index) => {
-    const moveToIndex = getPreviousIndex(state, index);
-    console.log(
-      itemsRef.current[moveToIndex].querySelector("div").getBoundingClientRect()
-    );
     dispatch({ type: "move_up", payload: { index } });
   };
 
