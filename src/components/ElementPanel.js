@@ -3,7 +3,7 @@ import { useRepeater } from "../store/RepeaterContext";
 import { Form } from "./Form";
 import { Panel } from "./Panel";
 
-export const Item = ({ item, index }) => {
+export const ElementPanel = ({ item, index }) => {
   const { addToRefs } = useRepeater();
   item.index = index;
   return (

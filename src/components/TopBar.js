@@ -13,12 +13,23 @@ export const TopBar = () => {
   useEffect(() => {
     if (!itemAdded) return;
 
-    const el = itemsRef.current[itemsRef.current.length - 1]
+    if (!itemsRef.current) {
+      return;
+    }
+
+    const el = itemsRef.current[itemsRef.current.length - 1];
+
+    if (!el) {
+      return;
+    }
+
     const y = el.querySelector("div").getBoundingClientRect().top + window.scrollY;
-    window.scroll({
-      top: y,
-      behavior: 'smooth'
-    });
+    if (y) {
+      window.scroll({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
 
     setItemAdded(false);
   }, [itemAdded])
@@ -26,9 +37,8 @@ export const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="content">
-        <p>Playing around with React Spring & Gutenburg <a href="https://github.com/timarney/react-spring-repeater-fields">[code]</a></p>
         <Button isPrimary focus={'undefined'} onClick={handleAddClient}>
-          Add Item
+          Add form element
         </Button>
       </div>
       <div className="one-edge-shadow fadedScroller_fade"></div>

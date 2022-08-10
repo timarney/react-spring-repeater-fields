@@ -47,9 +47,7 @@ const RepeaterReducer = (state, action) => {
 
 const RepeaterProvider = ({ children }) => {
   const defaultItems = [
-    { id: "123", name: "a" },
-    { id: "456", name: "b" },
-    { id: "789", name: "c" }
+    { id: "123", name: "a" }
   ];
 
   const itemsRef = useRef([]);

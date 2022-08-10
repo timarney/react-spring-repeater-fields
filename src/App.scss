@@ -15,14 +15,14 @@ body {
 .top-bar {
   position: fixed;
   background-color: #fff;
-  width: 500px;
+  width: 800px;
   height: 75px;
   z-index: 10000;
   padding: 20px 0;
 
-  .content{
-    margin-left:1.5em;
-    margin-bottom:.2em;
+  .content {
+    margin-left: 1.5em;
+    margin-bottom: 0.2em;
   }
 
   .fadedScroller_fade {
@@ -35,7 +35,7 @@ body {
     );
     position: relative;
   }
-  
+
   .one-edge-shadow {
     background-color: #fff;
     height: 18px;
@@ -51,16 +51,19 @@ body {
   }
 }
 
-
 .items {
   margin-left: 1.2em;
-  margin-bottom:200px;
+  margin-bottom: 200px;
+  padding-top: 120px;
+
   .item {
-    will-change: transform, height, opacity;
+    width:800px;
     border: 2px solid #efefef;
     padding: 1.25em;
     position: relative;
-    max-width: 400px;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 20px;
 
     label {
       display: block;
@@ -70,22 +73,24 @@ body {
 
     input {
       padding: 10px;
-      width: 200px;
+      width: 260px;
+      border: 1px solid rgba(0,0,0,.12);
+      height:24px;
     }
 
     .panel-actions {
       display: flex;
-    
+
       .mover {
         display: flex;
         flex-direction: column;
         margin-right: 0.2em;
-    
+
         button {
           width: 20px;
         }
       }
-    }    
+    }
   }
 }
 
@@ -98,4 +103,14 @@ body {
   .actions {
     display: flex;
   }
+}
+
+.element{
+  margin-top: 20px;
+}
+
+.element-row{
+  position: relative;
+  justify-content: space-between;
+  margin-right:80px;
 }
