@@ -1,20 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { TopBar } from "./components/TopBar";
+import { ElementForm, TopBar, ElementPanel } from "./components";
 import { RepeaterProvider, useRepeater } from "./store/RepeaterContext";
-import { ElementPanel } from "./components/ElementPanel";
 import './App.scss';
 
-const Elements = () => {
-  const { state } = useRepeater();
-
-  const items = state.map((item, index) => {
-    return <ElementPanel key={item.id} item={item} index={index} />
-  })
-
+const ElementPanels = () => {
+  const { state, addToRefs } = useRepeater();
   return (
     <div className="items">
-      {items}
+      {state.map((item, index) => {
+        item.index = index;
+        return (
+          <div className={`item item-${index}`} ref={addToRefs}>
+            <ElementForm item={item} />
+            <ElementPanel item={item} />
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -24,7 +26,7 @@ const App = () => {
     <RepeaterProvider>
       <div className="app">
         <TopBar />
-        <Elements />
+        <ElementPanels />
       </div>
     </RepeaterProvider>
   );

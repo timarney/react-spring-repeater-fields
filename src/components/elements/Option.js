@@ -14,8 +14,6 @@ const Remove = styled(Button)`
    margin-bottom:20px;
 `;
 
-import { CheckBoxEmptyIcon } from "../icons";
-
 export const Option = ({ index, item }) => {
 
   const { dispatch } = useRepeater();

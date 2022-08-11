@@ -1,13 +1,35 @@
 import React, { useState, useCallback } from "react";
 import { useRepeater, RepeaterProvider } from "../store/RepeaterContext";
-import { ElementSelect, items } from "./elements/ElementSelect";
+import { ElementSelect } from "./elements";
+import styled from "styled-components";
 import {
   ShortAnswer,
   Paragraph,
   MultipleChoice,
   Checkboxes,
   DropDownOptions
-} from "./elements/"
+} from "./elements";
+
+import {
+  ShortAnswerIcon,
+  ParagraphIcon,
+  RadioIcon,
+  CheckIcon,
+  SelectMenuIcon
+} from "./icons";
+
+const Separator = styled.div`
+    border-top: 1px solid rgba(0,0,0,.12);
+    margin: 8px 0;
+`;
+
+const items = [
+  { id: "short_answer", value: "Short answer", icon: <ShortAnswerIcon /> },
+  { id: "paragraph", value: "Paragraph", icon: <ParagraphIcon />, prepend: <Separator /> },
+  { id: "multiple_choice", value: "Multiple choice", icon: <RadioIcon /> },
+  { id: "checkboxes", value: "Checkboxes", icon: <CheckIcon /> },
+  { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
+];
 
 const Element = ({ selectedItem }) => {
   let element = null;
@@ -35,7 +57,7 @@ const Element = ({ selectedItem }) => {
   return element;
 };
 
-export const Form = ({ item }) => {
+export const ElementForm = ({ item }) => {
   const { dispatch } = useRepeater();
   const [selectedItem, setSelectedItem] = useState(items[2])
 

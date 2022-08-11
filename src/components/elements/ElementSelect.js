@@ -1,12 +1,5 @@
 import { useSelect } from "downshift";
 import styled from "styled-components";
-import {
-    ShortAnswerIcon,
-    ParagraphIcon,
-    RadioIcon,
-    CheckIcon,
-    SelectMenuIcon
-} from "../icons";
 
 const DropDownContainer = styled.div`
     width: 200px;
@@ -70,19 +63,6 @@ const DropDownListLabel = styled.div`
   color: #202124;
   line-height:24px;
 `;
-
-const Separator = styled.div`
-    border-top: 1px solid rgba(0,0,0,.12);
-    margin: 8px 0;
-`;
-
-export const items = [
-    { id: "short_answer", value: "Short answer", icon: <ShortAnswerIcon /> },
-    { id: "paragraph", value: "Paragraph", icon: <ParagraphIcon />, prepend: <Separator /> },
-    { id: "multiple_choice", value: "Multiple choice", icon: <RadioIcon /> },
-    { id: "checkboxes", value: "Checkboxes", icon: <CheckIcon /> },
-    { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
-];
 
 export const DropDown = ({ items, selectedItem, onChange }) => {
     const {
