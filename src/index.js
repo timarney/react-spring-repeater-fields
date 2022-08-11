@@ -11,7 +11,7 @@ const ElementPanels = () => {
       {state.map((item, index) => {
         item.index = index;
         return (
-          <div className={`item item-${index}`} ref={addToRefs}>
+          <div key={item.id} className={`item item-${index}`} ref={addToRefs}>
             <ElementForm item={item} />
             <ElementPanel item={item} />
           </div>

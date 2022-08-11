@@ -4,10 +4,15 @@ import { useRepeater } from "../store/RepeaterContext";
 
 export const TopBar = () => {
   const [itemAdded, setItemAdded] = useState(false);
-  const { dispatch, itemsRef } = useRepeater();
+  const { dispatch, itemsRef, state } = useRepeater();
   const handleAddClient = () => {
     dispatch({ type: "add" });
     setItemAdded(true)
+  };
+
+  const handleCopy = () => {
+    console.log("=== STATE ===");
+    console.log(JSON.stringify(state));
   };
 
   useEffect(() => {
@@ -39,6 +44,10 @@ export const TopBar = () => {
       <div className="content">
         <Button isPrimary focus={'undefined'} onClick={handleAddClient}>
           Add form element
+        </Button>
+
+        <Button isSecondary focus={'undefined'} onClick={handleCopy}>
+          Copy Form
         </Button>
       </div>
       <div className="one-edge-shadow fadedScroller_fade"></div>

@@ -16,7 +16,7 @@ const RepeaterReducer = (state, action) => {
     case "change": {
       return state.map((item, i) => {
         if (action.payload.index !== i) return item;
-        return { ...item, name: action.payload.value };
+        return { ...item, name: action.payload.value, children: action.payload.children };
       });
     }
     case "move_up": {

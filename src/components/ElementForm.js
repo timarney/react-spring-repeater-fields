@@ -89,7 +89,7 @@ export const ElementForm = ({ item }) => {
         />
         <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />
       </div>
-      <div class="element">
+      <div className="element">
         <Element selectedItem={selectedItem} />
       </div>
     </div>
