@@ -12,11 +12,21 @@ const getNextIndex = (items, index) => {
 
 const RepeaterContext = React.createContext();
 const RepeaterReducer = (state, action) => {
+  console.log(action.payload)
   switch (action.type) {
     case "change": {
       return state.map((item, i) => {
         if (action.payload.index !== i) return item;
-        return { ...item, name: action.payload.value, children: action.payload.children };
+
+        let props = {};
+        if (action.payload.type) {
+          props.type = action.payload.type;
+        }
+        if (action.payload.children) {
+          props.children = action.payload.children;
+        }
+        // rename "name" to question
+        return { ...item, name: action.payload.value, ...props };
       });
     }
     case "move_up": {
@@ -36,7 +46,11 @@ const RepeaterReducer = (state, action) => {
         })
       ];
     }
+    case "copy": {
+      return [...state];
+    }
     case "add": {
+      // rename "name" to question
       return [...state, { id: uuidv4(), name: "" }];
     }
     default: {

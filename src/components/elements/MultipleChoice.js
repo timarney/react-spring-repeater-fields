@@ -7,7 +7,8 @@ const AddOption = styled(Button)`
     margin-left:0px;
 `;
 
-export const MultipleChoice = () => {
+export const MultipleChoice = ({ item, handleUpdateChildren }) => {
+
     const { state, dispatch } = useRepeater();
     const items = state.map((item, index) => {
         return (<Radio key={item.id} item={item} index={index} />)
@@ -15,6 +16,9 @@ export const MultipleChoice = () => {
     return (
         <div>
             <div>{items}</div>
-            <AddOption isSecondary onClick={() => { dispatch({ type: "add" }); }}>Add Option</AddOption>
+            <AddOption isSecondary onClick={(e) => {
+                dispatch({ type: "add" });
+                handleUpdateChildren(e, item.id, state)
+            }}>Add Option</AddOption>
         </div>)
 }

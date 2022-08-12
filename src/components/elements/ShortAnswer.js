@@ -5,7 +5,7 @@ const TextHint = styled.div`
     color: rgba(0,0,0,.38);
 `;
 
-export const ShortAnswer = ({ index }) => {
+export const ShortAnswer = ({ item }) => {
     return (
         <TextHint>
             Short Answer text

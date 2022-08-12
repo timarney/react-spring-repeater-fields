@@ -20,6 +20,13 @@ export const Radio = ({ index, item }) => {
 
   const { dispatch } = useRepeater();
 
+  const handleChange = (e, index) => {
+    dispatch({
+      type: "change",
+      payload: { value: e.target.value, index }
+    });
+  };
+
   const handleRemoveItem = (id) => {
     dispatch({ type: "remove", payload: { id } });
   };
@@ -30,6 +37,9 @@ export const Radio = ({ index, item }) => {
       <TextInput
         type="text"
         placeholder={`Option ${index + 1}`}
+        onChange={(e) => {
+          handleChange(e, item.index);
+        }}
       />
       <Remove
         isSmall

@@ -31,30 +31,39 @@ const items = [
   { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
 ];
 
-const Element = ({ selectedItem }) => {
+const WithProvider = ({ item, children, handleUpdateChildren }) => {
+  return (
+    <RepeaterProvider>
+      {children}
+    </RepeaterProvider>
+  )
+}
+
+const Element = ({ selectedItem, ...props }) => {
+
   let element = null;
 
   switch (selectedItem.id) {
     case 'short_answer':
-      element = <ShortAnswer />
+      element = <ShortAnswer {...props} />
       break;
     case 'paragraph':
-      element = <Paragraph />
+      element = <Paragraph {...props} />
       break;
     case 'multiple_choice':
-      element = <RepeaterProvider><MultipleChoice /></RepeaterProvider>
+      element = <MultipleChoice {...props} />
       break;
     case 'checkboxes':
-      element = <RepeaterProvider><Checkboxes /></RepeaterProvider>
+      element = <Checkboxes {...props} />
       break;
     case 'dropdown':
-      element = <RepeaterProvider><DropDownOptions /></RepeaterProvider>
+      element = <DropDownOptions />
       break;
     default:
       element = null;
   }
 
-  return element;
+  return <WithProvider>{element}</WithProvider>;
 };
 
 export const ElementForm = ({ item }) => {
@@ -64,7 +73,14 @@ export const ElementForm = ({ item }) => {
   const handleChange = (e, index) => {
     dispatch({
       type: "change",
-      payload: { value: e.target.value, index }
+      payload: { value: e.target.value, index, type: selectedItem.id }
+    });
+  };
+
+  const handleUpdateChildren = (e, index, children) => {
+    dispatch({
+      type: "change",
+      payload: { value: e.target.value, index, children }
     });
   };
 
@@ -90,7 +106,7 @@ export const ElementForm = ({ item }) => {
         <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />
       </div>
       <div className="element">
-        <Element selectedItem={selectedItem} />
+        <Element item={item} selectedItem={selectedItem} handleUpdateChildren={handleUpdateChildren} />
       </div>
     </div>
   );

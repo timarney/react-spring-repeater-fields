@@ -11,8 +11,7 @@ export const TopBar = () => {
   };
 
   const handleCopy = () => {
-    console.log("=== STATE ===");
-    console.log(JSON.stringify(state));
+    dispatch({ type: "copy" });
   };
 
   useEffect(() => {
