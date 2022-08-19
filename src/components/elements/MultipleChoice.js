@@ -17,9 +17,7 @@ const AddButton = ({ index, onClick }) => {
     )
 }
 
-
 export const MultipleChoice = ({ item }) => {
-
     const { elements, addChild } = useFormElementStore();
     const { children } = elements[item.index];
 
@@ -27,8 +25,8 @@ export const MultipleChoice = ({ item }) => {
         return <AddButton index={item.index} onClick={addChild} />
     }
 
-    const items = children.map((item, index) => {
-        return (<Radio key={item.id} item={item} index={index} />)
+    const items = children.map((child, index) => {
+        return (child && <Radio parentIndex={item.index} key={child.id} item={child} index={index} />)
     })
 
     return (

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { close } from "@wordpress/icons";
 import { Button } from "@wordpress/components";
+import useFormElementStore from "../../store/formElement";
 
 const TextInput = styled.input`
    margin-left:20px;
@@ -15,7 +16,11 @@ const Remove = styled(Button)`
 
 import { RadioEmptyIcon } from "../icons";
 
-export const Radio = ({ index, item }) => {
+export const Radio = ({ parentIndex, index, item }) => {
+
+  console.log(item);
+
+  const { removeChild } = useFormElementStore();
 
   const handleChange = (e, index) => {
     //
@@ -39,7 +44,7 @@ export const Radio = ({ index, item }) => {
         isSmall
         icon={close}
         onClick={() => {
-          handleRemoveItem(item.id);
+          removeChild(parentIndex, index);
         }}
       >
       </Remove>
