@@ -26,7 +26,6 @@ export const Options = ({ item, renderIcon }) => {
     }
 
     const items = children.map((child, index) => {
-
         if (!child) return null;
         return (
             <ElementOption

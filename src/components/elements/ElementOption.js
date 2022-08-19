@@ -24,7 +24,7 @@ export const ElementOption = ({ parentIndex, index, item, renderIcon }) => {
       <TextInput
         type="text"
         value={val}
-        placeholder={`Option ${index}`}
+        placeholder={`Option ${index + 1}`}
         onChange={(e) => {
           updateChild(parentIndex, index, { key: "value", value: e.target.value })
         }}

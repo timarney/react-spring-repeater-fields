@@ -49,7 +49,7 @@ const Element = ({ selectedItem, ...props }) => {
       element = <Options {...props} renderIcon={() => <CheckBoxEmptyIcon />} />
       break;
     case 'dropdown':
-      element = <Options {...props} renderIcon={(index) => `${index}.`} />
+      element = <Options {...props} renderIcon={(index) => `${index + 1}.`} />
       break;
     default:
       element = null;
