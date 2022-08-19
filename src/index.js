@@ -8,8 +8,8 @@ const ElementPanels = () => {
   const { elements } = useFormElementStore();
   return (
     <div className="items">
-      {elements.map((item, index) => {
-        item.index = index;
+      {elements.map((element, index) => {
+        const item = { ...element, index };
         return (
           <div key={item.id} className={`item item-${index}`}>
             <ElementForm item={item} />
