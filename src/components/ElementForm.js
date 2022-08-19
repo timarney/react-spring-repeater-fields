@@ -1,18 +1,20 @@
 import React, { useState, useCallback } from "react";
-import { ElementSelect } from "./elements";
 import styled from "styled-components";
+import useFormElementStore from "../store/formElement";
+import { ElementSelect } from "./elements";
+
 import {
   ShortAnswer,
   Paragraph,
-  MultipleChoice,
-  Checkboxes,
-  DropDownOptions
+  Options
 } from "./elements";
 
 import {
   ShortAnswerIcon,
   ParagraphIcon,
   RadioIcon,
+  RadioEmptyIcon,
+  CheckBoxEmptyIcon,
   CheckIcon,
   SelectMenuIcon
 } from "./icons";
@@ -31,7 +33,6 @@ const items = [
 ];
 
 const Element = ({ selectedItem, ...props }) => {
-
   let element = null;
 
   switch (selectedItem.id) {
@@ -42,13 +43,13 @@ const Element = ({ selectedItem, ...props }) => {
       element = <Paragraph {...props} />
       break;
     case 'multiple_choice':
-      element = <MultipleChoice {...props} />
+      element = <Options {...props} renderIcon={() => <RadioEmptyIcon />} />
       break;
     case 'checkboxes':
-      element = <Checkboxes {...props} />
+      element = <Options {...props} renderIcon={() => <CheckBoxEmptyIcon />} />
       break;
     case 'dropdown':
-      element = <DropDownOptions />
+      element = <Options {...props} renderIcon={(index) => `${index}.`} />
       break;
     default:
       element = null;
@@ -57,22 +58,22 @@ const Element = ({ selectedItem, ...props }) => {
   return element;
 };
 
-export const ElementForm = ({ item }) => {
-  // default selectedItem to multipleChoice (items[2])
-  const [selectedItem, setSelectedItem] = useState(items[2])
+const getSelectedOption = (id) => {
+  return items.filter((item) => (item.id === id));
+}
 
-  const handleChange = (e, index) => {
-    /*
-    dispatch({
-      type: "change",
-      payload: { value: e.target.value, index, type: selectedItem.id }
-    });
-    */
-  };
+export const ElementForm = ({ item }) => {
+  const { elements, change } = useFormElementStore();
+  const { type } = elements[item.index];
+  const selected = getSelectedOption(type);
+  const val = selected && selected.length ? selected[0] : items[2];
+  // default selectedItem to multipleChoice (items[2])
+  const [selectedItem, setSelectedItem] = useState(val);
 
   const handleElementChange = useCallback(
     ({ selectedItem: newSelectedItem }) => {
       setSelectedItem(newSelectedItem);
+      change(item.index, { key: "type", value: newSelectedItem.id });
     },
     [setSelectedItem],
   );
@@ -86,7 +87,7 @@ export const ElementForm = ({ item }) => {
           placeholder={`Question`}
           value={item.name}
           onChange={(e) => {
-            handleChange(e, item.index);
+            change(item.index, { key: "name", value: e.target.value });
           }}
         />
         <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />

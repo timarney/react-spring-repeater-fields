@@ -36,6 +36,11 @@ const defaultState = []
 
 const store = (set) => ({
     elements: defaultState,
+    change: (index, payload) => set((state) => {
+        console.log(payload);
+        state.elements[index][payload.key] = payload.value;
+        return;
+    }),
     moveUp: (index) => set((state) => ({ elements: moveUp(state.elements, index) })),
     moveDown: (index) => set((state) => ({ elements: moveDown(state.elements, index) })),
     add: () => set((state) => ({ elements: add(state.elements) })),
@@ -47,7 +52,7 @@ const store = (set) => ({
         return;
     }),
     removeChild: (index, childIndex) => set((state) => {
-        delete state.elements[index].children[childIndex];
+        state.elements[index].children.splice(childIndex, 1);
         return;
     }),
 })

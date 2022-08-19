@@ -14,37 +14,21 @@ const Remove = styled(Button)`
    margin-bottom:20px;
 `;
 
-import { RadioEmptyIcon } from "../icons";
-
-export const Radio = ({ parentIndex, index, item }) => {
-
-  console.log(item);
-
+export const ElementOption = ({ parentIndex, index, item, renderIcon }) => {
   const { removeChild } = useFormElementStore();
-
-  const handleChange = (e, index) => {
-    //
-  };
-
-  const handleRemoveItem = (id) => {
-    //
-  };
-
+  const icon = renderIcon(index);
   return (
     <div>
-      <RadioEmptyIcon />
+      {icon}
       <TextInput
         type="text"
-        placeholder={`Option ${index + 1}`}
-        onChange={(e) => {
-          handleChange(e, item.index);
-        }}
+        placeholder={`Option ${index}`}
       />
       <Remove
         isSmall
         icon={close}
         onClick={() => {
-          removeChild(parentIndex, index);
+          removeChild(parentIndex, index)
         }}
       >
       </Remove>

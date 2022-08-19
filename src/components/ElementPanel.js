@@ -5,7 +5,6 @@ import useFormElementStore from "../store/formElement";
 
 export const ElementPanel = ({ item }) => {
   const { remove, moveUp, moveDown } = useFormElementStore();
-
   return (
     <div className="panel-actions">
       <div className="actions">
