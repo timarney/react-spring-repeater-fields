@@ -85,9 +85,9 @@ export const ElementForm = ({ item }) => {
           type="text"
           name={`item${item.index}`}
           placeholder={`Question`}
-          value={item.name}
+          value={item.question}
           onChange={(e) => {
-            change(item.index, { key: "name", value: e.target.value });
+            change(item.index, { key: "question", value: e.target.value });
           }}
         />
         <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />

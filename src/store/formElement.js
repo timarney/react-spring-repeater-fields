@@ -19,7 +19,7 @@ const removeIndex = (items, id) => {
 }
 
 const add = (items) => {
-    return [...items, { id: uuidv4(), name: "", children: [] }]
+    return [...items, { id: uuidv4(), question: "", children: [] }]
 }
 
 const moveUp = (items, index) => {
@@ -37,7 +37,6 @@ const defaultState = []
 const store = (set) => ({
     elements: defaultState,
     change: (index, payload) => set((state) => {
-        console.log(payload);
         state.elements[index][payload.key] = payload.value;
         return;
     }),
@@ -53,6 +52,10 @@ const store = (set) => ({
     }),
     removeChild: (index, childIndex) => set((state) => {
         state.elements[index].children.splice(childIndex, 1);
+        return;
+    }),
+    updateChild: (index, childIndex, payload) => set((state) => {
+        state.elements[index].children[childIndex][payload.key] = payload.value;
         return;
     }),
 })

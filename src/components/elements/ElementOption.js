@@ -15,14 +15,19 @@ const Remove = styled(Button)`
 `;
 
 export const ElementOption = ({ parentIndex, index, item, renderIcon }) => {
-  const { removeChild } = useFormElementStore();
+  const { elements, removeChild, updateChild } = useFormElementStore();
+  const val = elements[parentIndex].children[index].value;
   const icon = renderIcon(index);
   return (
     <div>
       {icon}
       <TextInput
         type="text"
+        value={val}
         placeholder={`Option ${index}`}
+        onChange={(e) => {
+          updateChild(parentIndex, index, { key: "value", value: e.target.value })
+        }}
       />
       <Remove
         isSmall
