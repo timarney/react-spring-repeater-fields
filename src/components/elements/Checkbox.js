@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { close } from "@wordpress/icons";
 import { Button } from "@wordpress/components";
-import { useRepeater } from "../../store/RepeaterContext";
 
 const TextInput = styled.input`
    margin-left:20px;
@@ -18,10 +17,8 @@ import { CheckBoxEmptyIcon } from "../icons";
 
 export const Checkbox = ({ index, item }) => {
 
-  const { dispatch } = useRepeater();
-
   const handleRemoveItem = (id) => {
-    dispatch({ type: "remove", payload: { id } });
+    //
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { useRepeater, RepeaterProvider } from "../store/RepeaterContext";
 import { ElementSelect } from "./elements";
 import styled from "styled-components";
 import {
@@ -31,14 +30,6 @@ const items = [
   { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
 ];
 
-const WithProvider = ({ item, children, handleUpdateChildren }) => {
-  return (
-    <RepeaterProvider>
-      {children}
-    </RepeaterProvider>
-  )
-}
-
 const Element = ({ selectedItem, ...props }) => {
 
   let element = null;
@@ -63,25 +54,20 @@ const Element = ({ selectedItem, ...props }) => {
       element = null;
   }
 
-  return <WithProvider>{element}</WithProvider>;
+  return element;
 };
 
 export const ElementForm = ({ item }) => {
-  const { dispatch } = useRepeater();
+  // default selectedItem to multipleChoice (items[2])
   const [selectedItem, setSelectedItem] = useState(items[2])
 
   const handleChange = (e, index) => {
+    /*
     dispatch({
       type: "change",
       payload: { value: e.target.value, index, type: selectedItem.id }
     });
-  };
-
-  const handleUpdateChildren = (e, index, children) => {
-    dispatch({
-      type: "change",
-      payload: { value: e.target.value, index, children }
-    });
+    */
   };
 
   const handleElementChange = useCallback(
@@ -106,7 +92,7 @@ export const ElementForm = ({ item }) => {
         <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />
       </div>
       <div className="element">
-        <Element item={item} selectedItem={selectedItem} handleUpdateChildren={handleUpdateChildren} />
+        <Element item={item} selectedItem={selectedItem} />
       </div>
     </div>
   );

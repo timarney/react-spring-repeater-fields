@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ElementForm, TopBar, ElementPanel } from "./components";
-import { RepeaterProvider, useRepeater } from "./store/RepeaterContext";
 import './App.scss';
+import useFormElementStore from "./store/formElement";
 
 const ElementPanels = () => {
-  const { state, addToRefs } = useRepeater();
+  const { elements } = useFormElementStore();
   return (
     <div className="items">
-      {state.map((item, index) => {
+      {elements.map((item, index) => {
         item.index = index;
         return (
-          <div key={item.id} className={`item item-${index}`} ref={addToRefs}>
+          <div key={item.id} className={`item item-${index}`}>
             <ElementForm item={item} />
             <ElementPanel item={item} />
           </div>
@@ -23,12 +23,10 @@ const ElementPanels = () => {
 
 const App = () => {
   return (
-    <RepeaterProvider>
-      <div className="app">
-        <TopBar />
-        <ElementPanels />
-      </div>
-    </RepeaterProvider>
+    <div className="app">
+      <TopBar />
+      <ElementPanels />
+    </div>
   );
 };
 
