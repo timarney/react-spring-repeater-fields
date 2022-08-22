@@ -4,6 +4,15 @@ import { immer } from 'zustand/middleware/immer';
 import { v4 as uuidv4 } from "uuid";
 import { moveDown, moveUp, add, removeIndex } from "../util";
 
+// Immer
+// https://www.youtube.com/watch?v=FmKjwh34Rn8
+
+// Zustand Re-renders
+// https://youtu.be/aOt4Hz3ze3Q?t=1547
+
+// Testing
+// https://docs.pmnd.rs/zustand/testing
+
 const store = (set) => ({
     elements: [],
     change: (index, payload) => set((state) => {
@@ -12,7 +21,9 @@ const store = (set) => ({
     }),
     moveUp: (index) => set((state) => ({ elements: moveUp(state.elements, index) })),
     moveDown: (index) => set((state) => ({ elements: moveDown(state.elements, index) })),
-    add: () => set((state) => ({ elements: add(state.elements) })),
+    add: () => set((state) => ({ elements: add(state.elements) 
+    // use immer here -- just push
+    })),
     remove: (id) => set((state => ({
         elements: removeIndex(state.elements, id)
     }))),
