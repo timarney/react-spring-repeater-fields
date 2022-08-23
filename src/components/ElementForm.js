@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import useFormElementStore from "../store/formElement";
 import { ElementSelect } from "./elements";
+import { PanelActions } from "./PanelActions";
 
 import {
   ShortAnswer,
@@ -24,7 +25,7 @@ const Separator = styled.div`
     margin: 8px 0;
 `;
 
-const items = [
+const elementOptions = [
   { id: "short_answer", value: "Short answer", icon: <ShortAnswerIcon /> },
   { id: "paragraph", value: "Paragraph", icon: <ParagraphIcon />, prepend: <Separator /> },
   { id: "multiple_choice", value: "Multiple choice", icon: <RadioIcon /> },
@@ -32,7 +33,7 @@ const items = [
   { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
 ];
 
-const Element = ({ selectedItem, ...props }) => {
+const SelectedElement = ({ selectedItem, ...props }) => {
   let element = null;
 
   switch (selectedItem.id) {
@@ -59,7 +60,7 @@ const Element = ({ selectedItem, ...props }) => {
 };
 
 const getSelectedOption = (id) => {
-  return items.filter((item) => (item.id === id));
+  return elementOptions.filter((item) => (item.id === id));
 }
 
 const Row = styled.div`
@@ -75,12 +76,11 @@ const Input = styled.input`
   height:24px;
 `;
 
-export const ElementForm = ({ item }) => {
+const Form = ({ item }) => {
   const { elements, change } = useFormElementStore();
   const { type } = elements[item.index];
   const selected = getSelectedOption(type);
-  const val = selected && selected.length ? selected[0] : items[2];
-  // default selectedItem to multipleChoice (items[2])
+  const val = selected && selected.length ? selected[0] : elementOptions[2];
   const [selectedItem, setSelectedItem] = useState(val);
 
   const handleElementChange = useCallback(
@@ -103,9 +103,36 @@ export const ElementForm = ({ item }) => {
             change(item.index, { key: "question", value: e.target.value });
           }}
         />
-        <ElementSelect options={items} selectedItem={selectedItem} onChange={handleElementChange} />
+        <ElementSelect options={elementOptions} selectedItem={selectedItem} onChange={handleElementChange} />
       </Row>
-      <Element item={item} selectedItem={selectedItem} />
+      <SelectedElement item={item} selectedItem={selectedItem} />
+    </>
+  );
+};
+
+const ElementWrapper = styled.div`
+  width:800px;
+  border: 2px solid #efefef;
+  padding: 1.25em;
+  position: relative;
+  max-width: 600px;
+  height: auto;
+  margin-bottom: 20px;
+`;
+
+export const ElementForm = () => {
+  const { elements } = useFormElementStore();
+  return (
+    <>
+      {elements.map((element, index) => {
+        const item = { ...element, index };
+        return (
+          <ElementWrapper key={item.id} className={`element-${index}`}>
+            <Form item={item} />
+            <PanelActions item={item} />
+          </ElementWrapper>
+        );
+      })}
     </>
   );
 };

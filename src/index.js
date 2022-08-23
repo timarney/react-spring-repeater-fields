@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { TopBar, Form } from "./components";
+import { TopBar, ElementForm } from "./components";
 
 const App = () => {
   return (
-    <div className="app">
+    <>
       <TopBar />
-      <Form />
-    </div>
+      <ElementForm />
+    </>
   );
 };
 

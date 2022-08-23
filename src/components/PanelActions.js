@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { ChevronUp, ChevronDown, Close } from "./icons";
 import useFormElementStore from "../store/formElement";
 
-const PanelActions = styled.div`
+const Actions = styled.div`
   display: flex;
 `;
 
@@ -21,10 +21,10 @@ const UpDown = styled.div`
   flex-direction:column;
 `;
 
-export const ElementPanel = ({ item }) => {
+export const PanelActions = ({ item }) => {
   const { remove, moveUp, moveDown } = useFormElementStore();
   return (
-    <PanelActions>
+    <Actions>
       <Mover>
         <UpDown>
           <Button focus={'undefined'} isSmall icon={<ChevronUp />} onClick={() => moveUp(item.index)} />
@@ -37,6 +37,6 @@ export const ElementPanel = ({ item }) => {
         >
         </Button>
       </Mover>
-    </PanelActions>
+    </Actions>
   );
 };

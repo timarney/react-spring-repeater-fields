@@ -4,9 +4,17 @@ import { Close } from "../icons";
 import { Button } from "../../components";
 import useFormElementStore from "../../store/formElement";
 
+
+const Option = styled.div`
+   margin-top:10px;
+`;
+
 const TextInput = styled.input`
    margin-left:20px;
-   margin-bottom:20px;
+   padding: 10px;
+   width: 260px;
+   border: 1px solid rgba(0,0,0,.12);
+   height:24px;
 `;
 
 export const ElementOption = ({ parentIndex, index, renderIcon }) => {
@@ -14,7 +22,7 @@ export const ElementOption = ({ parentIndex, index, renderIcon }) => {
   const val = elements[parentIndex].children[index].value;
   const icon = renderIcon(index);
   return (
-    <div>
+    <Option>
       {icon}
       <TextInput
         type="text"
@@ -32,6 +40,6 @@ export const ElementOption = ({ parentIndex, index, renderIcon }) => {
         }}
       >
       </Button>
-    </div>
+    </Option>
   )
 };
