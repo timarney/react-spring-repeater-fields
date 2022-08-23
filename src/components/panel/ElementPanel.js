@@ -64,8 +64,8 @@ const getSelectedOption = (item) => {
   const { elements } = useFormElementStore();
   const { type } = elements[item.index];
 
-  if(!type){
-    return  elementOptions[2];
+  if (!type) {
+    return elementOptions[2];
   }
 
   const selected = elementOptions.filter((item) => (item.id === type))
@@ -109,9 +109,16 @@ const Form = ({ item }) => {
             change(item.index, { key: "question", value: e.target.value });
           }}
         />
-        <Select options={elementOptions} selectedItem={selectedItem} onChange={handleElementChange} />
+        <Select
+          options={elementOptions}
+          selectedItem={selectedItem}
+          onChange={handleElementChange}
+        />
       </Row>
-      <SelectedElement item={item} selectedItem={selectedItem} />
+      <SelectedElement
+        item={item}
+        selectedItem={selectedItem}
+      />
     </>
   );
 };
@@ -126,7 +133,7 @@ const ElementWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-export const ElementForm = () => {
+export const ElementPanel = () => {
   const { elements, add } = useFormElementStore();
 
   if (!elements.length) {
@@ -147,7 +154,10 @@ export const ElementForm = () => {
               <Form item={item} />
               <PanelActions item={item} />
             </ElementWrapper>
-            <Button isPrimary onClick={add}>
+            <Button
+              isPrimary
+              onClick={add}
+            >
               Add form element
             </Button>
           </div>
