@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import useFormElementStore from "../../store/formElement";
-import { ElementSelect } from "../elements";
+import { Select } from "../elements";
 import { Button } from "./Button";
 import { PanelActions } from "./PanelActions";
 
@@ -63,6 +63,11 @@ const SelectedElement = ({ selectedItem, ...props }) => {
 const getSelectedOption = (item) => {
   const { elements } = useFormElementStore();
   const { type } = elements[item.index];
+
+  if(!type){
+    return  elementOptions[2];
+  }
+
   const selected = elementOptions.filter((item) => (item.id === type))
   return selected && selected.length ? selected[0] : elementOptions[2]
 }
@@ -104,7 +109,7 @@ const Form = ({ item }) => {
             change(item.index, { key: "question", value: e.target.value });
           }}
         />
-        <ElementSelect options={elementOptions} selectedItem={selectedItem} onChange={handleElementChange} />
+        <Select options={elementOptions} selectedItem={selectedItem} onChange={handleElementChange} />
       </Row>
       <SelectedElement item={item} selectedItem={selectedItem} />
     </>

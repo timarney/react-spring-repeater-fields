@@ -1,6 +1,6 @@
 import { Button } from "../panel";
 import useFormElementStore from "../../store/formElement";
-import { ElementOption } from "./ElementOption";
+import { Option } from "./Option";
 
 const AddButton = ({ index, onClick }) => {
     return (
@@ -20,10 +20,10 @@ export const Options = ({ item, renderIcon }) => {
         return <AddButton index={item.index} onClick={addChild} />
     }
 
-    const items = children.map((child, index) => {
+    const options = children.map((child, index) => {
         if (!child) return null;
         return (
-            <ElementOption
+            <Option
                 renderIcon={renderIcon}
                 parentIndex={item.index}
                 key={child.id}
@@ -35,7 +35,7 @@ export const Options = ({ item, renderIcon }) => {
 
     return (
         <div>
-            <div>{items}</div>
+            {options}
             <AddButton index={item.index} onClick={addChild} />
         </div>
     )

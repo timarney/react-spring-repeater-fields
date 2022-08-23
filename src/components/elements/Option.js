@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Close } from "../icons";
-import { Button } from "../../components/panel";
+import { Button } from "../panel";
 import useFormElementStore from "../../store/formElement";
 
-
-const Option = styled.div`
+const OptionWrapper = styled.div`
    margin-top:10px;
 `;
 
@@ -17,12 +16,12 @@ const TextInput = styled.input`
    height:24px;
 `;
 
-export const ElementOption = ({ parentIndex, index, renderIcon }) => {
+export const Option = ({ parentIndex, index, renderIcon }) => {
   const { elements, removeChild, updateChild } = useFormElementStore();
   const val = elements[parentIndex].children[index].value;
   const icon = renderIcon(index);
   return (
-    <Option>
+    <OptionWrapper>
       {icon}
       <TextInput
         type="text"
@@ -40,6 +39,6 @@ export const ElementOption = ({ parentIndex, index, renderIcon }) => {
         }}
       >
       </Button>
-    </Option>
+    </OptionWrapper>
   )
 };

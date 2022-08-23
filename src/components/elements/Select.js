@@ -104,7 +104,7 @@ export const DropDown = ({ items, selectedItem, onChange }) => {
     );
 };
 
-export const ElementSelect = ({ options, selectedItem, onChange }) => {
+export const Select = ({ options, selectedItem, onChange }) => {
     return <DropDown
         items={options}
         selectedItem={selectedItem}
