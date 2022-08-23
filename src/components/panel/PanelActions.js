@@ -27,8 +27,8 @@ export const PanelActions = ({ item }) => {
     <Actions>
       <Mover>
         <UpDown>
-          <Button focus={'undefined'} isSmall icon={<ChevronUp />} onClick={() => moveUp(item.index)} />
-          <Button focus={'undefined'} isSmall icon={<ChevronDown />} onClick={() => moveDown(item.index)} />
+          <Button isSmall icon={<ChevronUp />} onClick={() => moveUp(item.index)} />
+          <Button isSmall icon={<ChevronDown />} onClick={() => moveDown(item.index)} />
         </UpDown>
         <Button
           isSmall
