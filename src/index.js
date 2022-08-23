@@ -1,14 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ElementForm } from "./components/panel/ElementForm";
-
-const App = () => {
-  return (
-    <>
-      <ElementForm />
-    </>
-  );
-};
+import { ElementForm } from "./components/panel";
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<ElementForm />, rootElement);

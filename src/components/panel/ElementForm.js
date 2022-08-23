@@ -60,8 +60,11 @@ const SelectedElement = ({ selectedItem, ...props }) => {
   return element;
 };
 
-const getSelectedOption = (id) => {
-  return elementOptions.filter((item) => (item.id === id));
+const getSelectedOption = (item) => {
+  const { elements } = useFormElementStore();
+  const { type } = elements[item.index];
+  const selected = elementOptions.filter((item) => (item.id === type))
+  return selected && selected.length ? selected[0] : elementOptions[2]
 }
 
 const Row = styled.div`
@@ -78,11 +81,8 @@ const Input = styled.input`
 `;
 
 const Form = ({ item }) => {
-  const { elements, change } = useFormElementStore();
-  const { type } = elements[item.index];
-  const selected = getSelectedOption(type);
-  const val = selected && selected.length ? selected[0] : elementOptions[2];
-  const [selectedItem, setSelectedItem] = useState(val);
+  const { change } = useFormElementStore();
+  const [selectedItem, setSelectedItem] = useState(getSelectedOption(item));
 
   const handleElementChange = useCallback(
     ({ selectedItem: newSelectedItem }) => {
@@ -123,21 +123,29 @@ const ElementWrapper = styled.div`
 
 export const ElementForm = () => {
   const { elements, add } = useFormElementStore();
+
+  if (!elements.length) {
+    return (
+      <Button isPrimary onClick={add}>
+        Add form element
+      </Button>
+    )
+  }
+
   return (
     <>
       {elements.map((element, index) => {
         const item = { ...element, index };
         return (
-          <>
-            <ElementWrapper key={item.id} className={`element-${index}`}>
+          <div key={item.id}>
+            <ElementWrapper className={`element-${index}`}>
               <Form item={item} />
               <PanelActions item={item} />
             </ElementWrapper>
-
-            <Button isPrimary focus={'undefined'} onClick={add}>
+            <Button isPrimary onClick={add}>
               Add form element
             </Button>
-          </>
+          </div>
         );
       })}
     </>
