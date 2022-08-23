@@ -1,4 +1,4 @@
-import { Button } from "../../components";
+import { Button } from "../panel";
 import useFormElementStore from "../../store/formElement";
 import { ElementOption } from "./ElementOption";
 

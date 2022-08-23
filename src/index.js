@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { TopBar, ElementForm } from "./components";
+import { ElementForm } from "./components/panel/ElementForm";
 
 const App = () => {
   return (
     <>
-      <TopBar />
       <ElementForm />
     </>
   );

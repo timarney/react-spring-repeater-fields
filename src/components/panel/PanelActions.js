@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "./Button";
-import { ChevronUp, ChevronDown, Close } from "./icons";
-import useFormElementStore from "../store/formElement";
+import { ChevronUp, ChevronDown, Close } from "../icons";
+import useFormElementStore from "../../store/formElement";
 
 const Actions = styled.div`
   display: flex;

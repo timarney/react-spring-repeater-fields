@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import useFormElementStore from "../store/formElement";
-import { ElementSelect } from "./elements";
+import useFormElementStore from "../../store/formElement";
+import { ElementSelect } from "../elements";
+import { Button } from "./Button";
 import { PanelActions } from "./PanelActions";
 
 import {
   ShortAnswer,
   Paragraph,
   Options
-} from "./elements";
+} from "../elements";
 
 import {
   ShortAnswerIcon,
@@ -18,7 +19,7 @@ import {
   CheckBoxEmptyIcon,
   CheckIcon,
   SelectMenuIcon
-} from "./icons";
+} from "../icons";
 
 const Separator = styled.div`
     border-top: 1px solid rgba(0,0,0,.12);
@@ -121,16 +122,22 @@ const ElementWrapper = styled.div`
 `;
 
 export const ElementForm = () => {
-  const { elements } = useFormElementStore();
+  const { elements, add } = useFormElementStore();
   return (
     <>
       {elements.map((element, index) => {
         const item = { ...element, index };
         return (
-          <ElementWrapper key={item.id} className={`element-${index}`}>
-            <Form item={item} />
-            <PanelActions item={item} />
-          </ElementWrapper>
+          <>
+            <ElementWrapper key={item.id} className={`element-${index}`}>
+              <Form item={item} />
+              <PanelActions item={item} />
+            </ElementWrapper>
+
+            <Button isPrimary focus={'undefined'} onClick={add}>
+              Add form element
+            </Button>
+          </>
         );
       })}
     </>

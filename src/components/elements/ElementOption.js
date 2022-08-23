@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Close } from "../icons";
-import { Button } from "../../components";
+import { Button } from "../../components/panel";
 import useFormElementStore from "../../store/formElement";
 
 
