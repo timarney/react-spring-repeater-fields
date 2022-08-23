@@ -62,6 +62,19 @@ const getSelectedOption = (id) => {
   return items.filter((item) => (item.id === id));
 }
 
+const Row = styled.div`
+  position: relative;
+  justify-content: space-between;
+  margin-right:80px;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  width: 260px;
+  border: 1px solid rgba(0,0,0,.12);
+  height:24px;
+`;
+
 export const ElementForm = ({ item }) => {
   const { elements, change } = useFormElementStore();
   const { type } = elements[item.index];
@@ -79,9 +92,9 @@ export const ElementForm = ({ item }) => {
   );
 
   return (
-    <div>
-      <div className="element-row">
-        <input
+    <>
+      <Row>
+        <Input
           type="text"
           name={`item${item.index}`}
           placeholder={`Question`}
@@ -90,11 +103,9 @@ export const ElementForm = ({ item }) => {
             change(item.index, { key: "question", value: e.target.value });
           }}
         />
-        <ElementSelect items={items} selectedItem={selectedItem} onChange={handleElementChange} />
-      </div>
-      <div className="element">
-        <Element item={item} selectedItem={selectedItem} />
-      </div>
-    </div>
+        <ElementSelect options={items} selectedItem={selectedItem} onChange={handleElementChange} />
+      </Row>
+      <Element item={item} selectedItem={selectedItem} />
+    </>
   );
 };

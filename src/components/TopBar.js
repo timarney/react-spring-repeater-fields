@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@wordpress/components";
+import { Button } from "../components/Button";
 import useFormElementStore from "../store/formElement";
 
 export const TopBar = () => {

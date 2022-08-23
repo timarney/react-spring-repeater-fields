@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { close } from "@wordpress/icons";
-import { Button } from "@wordpress/components";
+import { Close } from "../icons";
+import { Button } from "../../components";
 import useFormElementStore from "../../store/formElement";
 
 const TextInput = styled.input`
@@ -9,12 +9,7 @@ const TextInput = styled.input`
    margin-bottom:20px;
 `;
 
-const Remove = styled(Button)`
-   margin-left:10px;
-   margin-bottom:20px;
-`;
-
-export const ElementOption = ({ parentIndex, index, item, renderIcon }) => {
+export const ElementOption = ({ parentIndex, index, renderIcon }) => {
   const { elements, removeChild, updateChild } = useFormElementStore();
   const val = elements[parentIndex].children[index].value;
   const icon = renderIcon(index);
@@ -29,14 +24,14 @@ export const ElementOption = ({ parentIndex, index, item, renderIcon }) => {
           updateChild(parentIndex, index, { key: "value", value: e.target.value })
         }}
       />
-      <Remove
+      <Button
         isSmall
-        icon={close}
+        icon={<Close />}
         onClick={() => {
           removeChild(parentIndex, index)
         }}
       >
-      </Remove>
+      </Button>
     </div>
   )
 };

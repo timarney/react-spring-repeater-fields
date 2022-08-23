@@ -1,19 +1,14 @@
-import { Button } from "@wordpress/components";
-import styled from "styled-components";
+import { Button } from "../../components";
 import useFormElementStore from "../../store/formElement";
 import { ElementOption } from "./ElementOption";
 
-const AddOption = styled(Button)`
-    margin-left:0px;
-`;
-
 const AddButton = ({ index, onClick }) => {
     return (
-        <AddOption
+        <Button
             isSecondary
             onClick={() => { onClick(index); }}>
             Add Option
-        </AddOption>
+        </Button>
     )
 }
 

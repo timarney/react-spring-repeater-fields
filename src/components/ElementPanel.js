@@ -1,28 +1,42 @@
 import React from "react";
-import { Button } from "@wordpress/components";
-import { chevronUp, chevronDown, close } from "@wordpress/icons";
+import styled from "styled-components";
+import { Button } from "./Button";
+import { ChevronUp, ChevronDown, Close } from "./icons";
 import useFormElementStore from "../store/formElement";
+
+const PanelActions = styled.div`
+  display: flex;
+`;
+
+const Mover = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  display:flex;
+`;
+
+const UpDown = styled.div`
+  display:flex;
+  flex-direction:column;
+`;
 
 export const ElementPanel = ({ item }) => {
   const { remove, moveUp, moveDown } = useFormElementStore();
   return (
-    <div className="panel-actions">
-      <div className="actions">
-        <div className="block-editor-block-mover">
-          <div className="mover components-toolbar-group block-editor-block-mover__move-button-container">
-            <Button focus={'undefined'} isSmall icon={chevronUp} onClick={() => moveUp(item.index)} />
-            <Button focus={'undefined'} isSmall icon={chevronDown} onClick={() => moveDown(item.index)} />
-          </div>
-        </div>
-        <div className="remove">
-          <Button
-            isSmall
-            icon={close}
-            onClick={() => { remove(item.id); }}
-          >
-          </Button>
-        </div>
-      </div>
-    </div>
+    <PanelActions>
+      <Mover>
+        <UpDown>
+          <Button focus={'undefined'} isSmall icon={<ChevronUp />} onClick={() => moveUp(item.index)} />
+          <Button focus={'undefined'} isSmall icon={<ChevronDown />} onClick={() => moveDown(item.index)} />
+        </UpDown>
+        <Button
+          isSmall
+          icon={<Close />}
+          onClick={() => { remove(item.id); }}
+        >
+        </Button>
+      </Mover>
+    </PanelActions>
   );
 };
