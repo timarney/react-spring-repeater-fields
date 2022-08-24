@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Navigation } from "./components/Navigation";
 import { ElementPanel } from "./components/panel";
-
+import { Output } from "./components/Output";
 const rootElement = document.getElementById("root");
-ReactDOM.render(<><Navigation /> <ElementPanel /></>, rootElement);
+ReactDOM.render(<><ElementPanel /> <Output /></>, rootElement);

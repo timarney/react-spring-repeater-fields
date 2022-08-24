@@ -146,6 +146,7 @@ export const ElementPanel = () => {
 
   return (
     <>
+      <h1>Form</h1>
       {elements.map((element, index) => {
         const item = { ...element, index };
         return (
