@@ -14,8 +14,24 @@ export const removeIndex = (items, id) => {
   })
 }
 
+const defaultField = {
+  "id": "",
+  "type": "",
+  "properties": {
+    "choices": [],
+    "titleEn": "",
+    "titleFr": "",
+    "validation": {
+      "required": false
+    },
+    "descriptionEn": "",
+    "descriptionFr": "",
+  }
+}
+
 export const add = (items) => {
-  return [...items, { id: uuidv4(), question: "", children: [] }]
+  // @todo --- id expects a number need to replace random function
+  return [...items, { ...defaultField, id: Math.floor(Math.random() * 100), "type": "radio" }]
 }
 
 export const moveUp = (items, index) => {

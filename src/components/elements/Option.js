@@ -17,8 +17,8 @@ const TextInput = styled.input`
 `;
 
 export const Option = ({ parentIndex, index, renderIcon }) => {
-  const { elements, removeChild, updateChild } = useFormElementStore();
-  const val = elements[parentIndex].children[index].value;
+  const { elements, removeChild, updateChild, lang } = useFormElementStore();
+  const val = elements[parentIndex].properties.choices[index][lang];
   const icon = renderIcon(index);
   return (
     <OptionWrapper>
@@ -28,7 +28,7 @@ export const Option = ({ parentIndex, index, renderIcon }) => {
         value={val}
         placeholder={`Option ${index + 1}`}
         onChange={(e) => {
-          updateChild(parentIndex, index, { key: "value", value: e.target.value })
+          updateChild(parentIndex, index, { key: "en", value: e.target.value })
         }}
       />
       <Button

@@ -14,19 +14,24 @@ const AddButton = ({ index, onClick }) => {
 
 export const Options = ({ item, renderIcon }) => {
     const { elements, addChild } = useFormElementStore();
-    const { children } = elements[item.index];
 
-    if (!children) {
+    if (!elements[item.index].properties) {
         return <AddButton index={item.index} onClick={addChild} />
     }
 
-    const options = children.map((child, index) => {
-        if (!child) return null;
+    const { choices } = elements[item.index].properties;
+
+    if (!choices) {
+        return <AddButton index={item.index} onClick={addChild} />
+    }
+
+    const options = choices.map((child, index) => {
+        if (!child || !item) return null;
         return (
             <Option
                 renderIcon={renderIcon}
                 parentIndex={item.index}
-                key={child.id}
+                key={`child-${item.id}-${index}`}
                 item={child}
                 index={index}
             />

@@ -27,10 +27,10 @@ const Separator = styled.div`
 `;
 
 const elementOptions = [
-  { id: "short_answer", value: "Short answer", icon: <ShortAnswerIcon /> },
-  { id: "paragraph", value: "Paragraph", icon: <ParagraphIcon />, prepend: <Separator /> },
-  { id: "multiple_choice", value: "Multiple choice", icon: <RadioIcon /> },
-  { id: "checkboxes", value: "Checkboxes", icon: <CheckIcon /> },
+  { id: "textField", value: "Short answer", icon: <ShortAnswerIcon /> },
+  { id: "textArea", value: "Paragraph", icon: <ParagraphIcon />, prepend: <Separator /> },
+  { id: "radio", value: "Multiple choice", icon: <RadioIcon /> },
+  { id: "checkbox", value: "Checkboxes", icon: <CheckIcon /> },
   { id: "dropdown", value: "Dropdown", icon: <SelectMenuIcon /> }
 ];
 
@@ -38,16 +38,16 @@ const SelectedElement = ({ selectedItem, ...props }) => {
   let element = null;
 
   switch (selectedItem.id) {
-    case 'short_answer':
+    case 'textField':
       element = <ShortAnswer {...props} />
       break;
-    case 'paragraph':
+    case 'textArea':
       element = <Paragraph {...props} />
       break;
-    case 'multiple_choice':
+    case 'radio':
       element = <Options {...props} renderIcon={() => <RadioEmptyIcon />} />
       break;
-    case 'checkboxes':
+    case 'checkbox':
       element = <Options {...props} renderIcon={() => <CheckBoxEmptyIcon />} />
       break;
     case 'dropdown':
@@ -86,7 +86,7 @@ const Input = styled.input`
 `;
 
 const Form = ({ item }) => {
-  const { change } = useFormElementStore();
+  const { change, changeProperties } = useFormElementStore();
   const [selectedItem, setSelectedItem] = useState(getSelectedOption(item));
 
   const handleElementChange = useCallback(
@@ -104,9 +104,9 @@ const Form = ({ item }) => {
           type="text"
           name={`item${item.index}`}
           placeholder={`Question`}
-          value={item.question}
+          value={item.properties.titleEn}
           onChange={(e) => {
-            change(item.index, { key: "question", value: e.target.value });
+            changeProperties(item.index, { key: "titleEn", value: e.target.value });
           }}
         />
         <Select
